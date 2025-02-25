@@ -1,7 +1,30 @@
 <p><%= flash[:alert] %></p>
 <%= form_with(model: @forecast, url: forecasts_path, method: :get) do |form| %>
-  <%= form.text_field :zip_code %>
-  <%= form.text_field :country_code %>
-
+  <input id="autocomplete" type="text" placeholder="Enter a location" />
+  <input type="hidden" name="country_code" id="country_code" />
+  <input type="hidden" name="zip_code" id="zip_code" />
   <%= form.submit "Show Forecast" %>
 <% end %>
+
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_PLACES_API_KEY']}&loading=async&libraries=places&callback=initMap" %>
+
+<script>
+  let autocomplete;
+
+  function initMap() {
+    const input = document.getElementById("autocomplete");
+    autocomplete = new google.maps.places.Autocomplete(input);
+
+    autocomplete.addListener("place_changed", function() {
+      const place = autocomplete.getPlace();
+      console.log('place', place);
+      if (place && place.address_components) {
+        const countryCode = place.address_components[5].short_name;
+        const zipCode = place.address_components[6].short_name;
+
+        document.getElementById("country_code").value = countryCode;
+        document.getElementById("zip_code").value = zipCode;
+      }
+    });
+  }
+</script>
