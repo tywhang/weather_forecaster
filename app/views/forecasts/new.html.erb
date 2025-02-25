@@ -1,6 +1,6 @@
 <p><%= flash[:alert] %></p>
 <%= form_with(model: @forecast, url: forecasts_path, method: :get) do |form| %>
-  <input id="autocomplete" type="text" placeholder="Enter a location" />
+  <input style="width: 50%" id="autocomplete" type="text" placeholder="Enter a location" />
   <input type="hidden" name="country_code" id="country_code" />
   <input type="hidden" name="zip_code" id="zip_code" />
   <%= form.submit "Show Forecast" %>
@@ -17,13 +17,20 @@
 
     autocomplete.addListener("place_changed", function() {
       const place = autocomplete.getPlace();
-      console.log('place', place);
-      if (place && place.address_components) {
-        const countryCode = place.address_components[5].short_name;
-        const zipCode = place.address_components[6].short_name;
 
-        document.getElementById("country_code").value = countryCode;
-        document.getElementById("zip_code").value = zipCode;
+      if (place && place.address_components) {
+        for (const component of place.address_components) {
+          const componentType = component.types[0];
+
+          switch(componentType) {
+            case "country":
+              document.getElementById("country_code").value = component.short_name;
+              break;
+            case "postal_code":
+              document.getElementById("zip_code").value = component.short_name;
+              break;
+          }
+        }
       }
     });
   }
