@@ -1,0 +1,6 @@
+<%= form_with(model: @forecast, url: forecasts_path, method: :get) do |form| %>
+  <%= form.text_field :zip_code %>
+  <%= form.text_field :country_code %>
+
+  <%= form.submit "Show Forecast" %>
+<% end %>
