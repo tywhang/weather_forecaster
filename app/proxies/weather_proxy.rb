@@ -21,7 +21,7 @@ class WeatherProxy
       url = "#{GEOCODING_BASE_API}?zip=#{zip_code},#{country_code}&appid=#{api_key}"
 
       response = HTTParty.get(url)
-      response_json = handle_response(response, zip_code: zip_code, country_code: country_code)
+      response_json = JSON.parse(response.body)
 
       lat = response_json["lat"]
       lon = response_json["lon"]
@@ -35,12 +35,49 @@ class WeatherProxy
 
     def handle_response(response, zip_code:, country_code:)
       if response.success?
-        JSON.parse(response.body)
+        parse_response(response.body)
       else
         raise_exception("HTTP request failed with code #{response.code}: #{response.message}", zip_code:, country_code:)
       end
     rescue JSON::ParserError => e
       raise_exception("Failed to parse JSON response: #{e.message}", zip_code:, country_code:)
+    end
+
+    def parse_response(response)
+      res = JSON.parse(response)
+      current_dt = res['current']['dt']
+
+      {
+        lat: res['lat'],
+        lon: res['lon'],
+        date: dt_to_date(current_dt),
+        time: dt_to_time(current_dt),
+        day_of_week: dt_to_day_of_week(current_dt),
+        temp: kelvin_to_celsius(res['temp']),
+        daily: res['daily'].slice(0, 7).map do |day|
+          {
+            day_of_week: dt_to_day_of_week(day['dt']),
+            temp_min: kelvin_to_celsius(day['temp']['min']),
+            temp_max: kelvin_to_celsius(day['temp']['max']),
+          }
+        end
+      }
+    end
+
+    def dt_to_date(dt)
+      Time.at(dt).strftime("%Y-%m-%d")
+    end
+
+    def dt_to_time(dt)
+      Time.at(dt).strftime("%H:%M")
+    end
+
+    def dt_to_day_of_week(dt)
+      Time.at(dt).strftime("%a")
+    end
+
+    def kelvin_to_celsius(kelvin)
+      (kelvin.to_f - 273.15).round
     end
 
     def raise_exception(message, zip_code:, country_code:)

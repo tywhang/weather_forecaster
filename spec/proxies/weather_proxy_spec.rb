@@ -13,14 +13,18 @@ RSpec.describe WeatherProxy, type: :model do
           WeatherProxy.get_weather_data(zip_code: zip_code, country_code: country_code)
         end
 
-        expect(result['current']['dt']).to be_present
-        expect(result['current']['temp']).to be_present
-        expect(result['daily'].length).to eq(8)
+        expect(result[:lat]).to be_present
+        expect(result[:lon]).to be_present
+        expect(result[:date]).to be_present
+        expect(result[:time]).to be_present
+        expect(result[:day_of_week]).to be_present
+        expect(result[:temp]).to be_present
+        expect(result[:daily].length).to eq(7)
 
-        result['daily'].each do |day|
-          expect(day['dt']).to be_present
-          expect(day['temp']['day']).to be_present
-          expect(day['weather'].length).to eq(1)
+        result[:daily].each do |day|
+          expect(day[:day_of_week]).to be_present
+          expect(day[:temp_min]).to be_present
+          expect(day[:temp_max]).to be_present
         end
       end
     end
