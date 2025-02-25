@@ -1,0 +1,100 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.openweathermap.org/geo/1.0/zip?appid=347d7ad00e9036d0210f3760a97b5514&zip=10001,US
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - openresty
+      Date:
+      - Tue, 25 Feb 2025 07:52:33 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '77'
+      Connection:
+      - keep-alive
+      X-Cache-Key:
+      - "/geo/1.0/zip?zip=10001,us"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '{"zip":"10001","name":"New York","lat":40.7484,"lon":-73.9967,"country":"US"}'
+  recorded_at: Tue, 25 Feb 2025 07:52:33 GMT
+- request:
+    method: get
+    uri: https://api.openweathermap.org/data/3.0/onecall?appid=347d7ad00e9036d0210f3760a97b5514&exclude=minutely,hourly,alerts&lat=40.7484&lon=-73.9967
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - openresty
+      Date:
+      - Tue, 25 Feb 2025 07:52:33 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '4818'
+      Connection:
+      - keep-alive
+      X-Cache-Key:
+      - "/data/3.0/onecall?exclude=minutely,hourly,alerts&lat=40.75&lon=-74"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '{"lat":40.7484,"lon":-73.9967,"timezone":"America/New_York","timezone_offset":-18000,"current":{"dt":1740469953,"sunrise":1740483353,"sunset":1740523348,"temp":278.45,"feels_like":275.04,"pressure":1011,"humidity":58,"dew_point":271.13,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":4.63,"wind_deg":230,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}]},"daily":[{"dt":1740502800,"sunrise":1740483353,"sunset":1740523348,"moonrise":1740479280,"moonset":1740513420,"moon_phase":0.91,"summary":"Expect
+        a day of partly cloudy with clear spells","temp":{"day":282.51,"min":276.88,"max":283.52,"night":278.71,"eve":281.9,"morn":277.29},"feels_like":{"day":281.13,"night":276.21,"eve":279.43,"morn":275.05},"pressure":1008,"humidity":56,"dew_point":274.09,"wind_speed":5.22,"wind_deg":275,"wind_gust":14.39,"weather":[{"id":804,"main":"Clouds","description":"overcast
+        clouds","icon":"04d"}],"clouds":100,"pop":0,"uvi":2.59},{"dt":1740589200,"sunrise":1740569664,"sunset":1740609818,"moonrise":1740567720,"moonset":1740604380,"moon_phase":0.95,"summary":"Expect
+        a day of partly cloudy with rain","temp":{"day":282.12,"min":276.36,"max":284.39,"night":280.73,"eve":282.84,"morn":277.62},"feels_like":{"day":279.89,"night":280.22,"eve":281.61,"morn":274.81},"pressure":1012,"humidity":45,"dew_point":270.83,"wind_speed":5.29,"wind_deg":312,"wind_gust":11.84,"weather":[{"id":500,"main":"Rain","description":"light
+        rain","icon":"10d"}],"clouds":9,"pop":0.23,"rain":0.13,"uvi":3.56},{"dt":1740675600,"sunrise":1740655973,"sunset":1740696287,"moonrise":1740655800,"moonset":1740695460,"moon_phase":0,"summary":"Expect
+        a day of partly cloudy with rain","temp":{"day":281.18,"min":278.51,"max":285.44,"night":279.23,"eve":283.12,"morn":278.7},"feels_like":{"day":278.89,"night":275.81,"eve":280.48,"morn":278.7},"pressure":1004,"humidity":98,"dew_point":280.77,"wind_speed":6.52,"wind_deg":256,"wind_gust":14.73,"weather":[{"id":501,"main":"Rain","description":"moderate
+        rain","icon":"10d"}],"clouds":100,"pop":1,"rain":6.21,"uvi":1.08},{"dt":1740762000,"sunrise":1740742282,"sunset":1740782755,"moonrise":1740743760,"moonset":1740786420,"moon_phase":0.03,"summary":"There
+        will be partly cloudy today","temp":{"day":279.38,"min":276.06,"max":279.64,"night":277.96,"eve":278.22,"morn":276.06},"feels_like":{"day":275.01,"night":275.65,"eve":275.78,"morn":272.27},"pressure":1006,"humidity":32,"dew_point":263.99,"wind_speed":7.7,"wind_deg":297,"wind_gust":11.44,"weather":[{"id":802,"main":"Clouds","description":"scattered
+        clouds","icon":"03d"}],"clouds":28,"pop":0,"uvi":2.91},{"dt":1740848400,"sunrise":1740828590,"sunset":1740869223,"moonrise":1740831600,"moonset":1740877440,"moon_phase":0.06,"summary":"You
+        can expect partly cloudy in the morning, with clearing in the afternoon","temp":{"day":283.98,"min":270.75,"max":283.98,"night":270.75,"eve":273.77,"morn":277.84},"feels_like":{"day":282.58,"night":263.82,"eve":267.37,"morn":274.45},"pressure":1000,"humidity":56,"dew_point":275.41,"wind_speed":8.7,"wind_deg":323,"wind_gust":15.24,"weather":[{"id":804,"main":"Clouds","description":"overcast
+        clouds","icon":"04d"}],"clouds":92,"pop":0,"uvi":0.09},{"dt":1740934800,"sunrise":1740914898,"sunset":1740955691,"moonrise":1740919500,"moonset":1740968520,"moon_phase":0.1,"summary":"Expect
+        a day of partly cloudy with clear spells","temp":{"day":273.46,"min":267.71,"max":275.33,"night":272.32,"eve":274.18,"morn":267.71},"feels_like":{"day":269.77,"night":268.42,"eve":270.77,"morn":260.71},"pressure":1021,"humidity":24,"dew_point":255.13,"wind_speed":6.96,"wind_deg":326,"wind_gust":10.4,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"clouds":0,"pop":0,"uvi":1},{"dt":1741021200,"sunrise":1741001204,"sunset":1741042159,"moonrise":1741007460,"moonset":1741059600,"moon_phase":0.14,"summary":"Expect
+        a day of partly cloudy with clear spells","temp":{"day":274.6,"min":270.32,"max":276.32,"night":274.22,"eve":275.4,"morn":270.32},"feels_like":{"day":271.84,"night":271.42,"eve":274.05,"morn":265.34},"pressure":1026,"humidity":26,"dew_point":256.9,"wind_speed":4.06,"wind_deg":317,"wind_gust":5.7,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"clouds":4,"pop":0,"uvi":1},{"dt":1741107600,"sunrise":1741087510,"sunset":1741128626,"moonrise":1741095720,"moonset":1741150740,"moon_phase":0.18,"summary":"There
+        will be clear sky until morning, then partly cloudy","temp":{"day":280.58,"min":273.28,"max":282.76,"night":278.47,"eve":280.53,"morn":273.28},"feels_like":{"day":277.72,"night":276.42,"eve":278.51,"morn":269.56},"pressure":1021,"humidity":29,"dew_point":263.44,"wind_speed":4.86,"wind_deg":236,"wind_gust":9.52,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04d"}],"clouds":56,"pop":0,"uvi":1}]}'
+  recorded_at: Tue, 25 Feb 2025 07:52:33 GMT
+recorded_with: VCR 6.3.1

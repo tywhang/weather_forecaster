@@ -8,7 +8,9 @@ class WeatherProxy
 
       url = "#{ONECALL_BASE_API}?lat=#{lat}&lon=#{lon}&exclude=minutely,hourly,alerts&appid=#{api_key}"
       response = HTTParty.get(url)
-      JSON.parse(response.body)
+      handle_response(response, zip_code: zip_code, country_code: country_code)
+    rescue StandardError => e
+      raise_exception("Failed to fetch weather data: #{e.message}.", zip_code:, country_code:)
     end
 
     private
@@ -17,7 +19,7 @@ class WeatherProxy
       url = "#{GEOCODING_BASE_API}?zip=#{zip_code},#{country_code}&appid=#{api_key}"
 
       response = HTTParty.get(url)
-      response_json = JSON.parse(response.body)
+      response_json = handle_response(response, zip_code: zip_code, country_code: country_code)
 
       lat = response_json["lat"]
       lon = response_json["lon"]
@@ -27,6 +29,20 @@ class WeatherProxy
 
     def api_key
       @api_key = ENV['WEATHER_API_KEY']
+    end
+
+    def handle_response(response, zip_code:, country_code:)
+      if response.success?
+        JSON.parse(response.body)
+      else
+        raise_exception("HTTP request failed with code #{response.code}: #{response.message}", zip_code:, country_code:)
+      end
+    rescue JSON::ParserError => e
+      raise_exception("Failed to parse JSON response: #{e.message}", zip_code:, country_code:)
+    end
+
+    def raise_exception(message, zip_code:, country_code:)
+      raise "WeatherProxy - zip_code: #{zip_code}, country_code: #{country_code}: #{message}"
     end
   end
 end
