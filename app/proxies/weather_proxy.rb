@@ -4,11 +4,13 @@ class WeatherProxy
 
   class << self
     def get_weather_data(zip_code:, country_code:)
-      lat, lon = get_lat_lon(zip_code: zip_code, country_code: country_code)
+      Rails.cache.fetch("weather_data/#{country_code}/#{zip_code}", expires_in: 30.minutes) do
+        lat, lon = get_lat_lon(zip_code: zip_code, country_code: country_code)
+        url = "#{ONECALL_BASE_API}?lat=#{lat}&lon=#{lon}&exclude=minutely,hourly,alerts&appid=#{api_key}"
 
-      url = "#{ONECALL_BASE_API}?lat=#{lat}&lon=#{lon}&exclude=minutely,hourly,alerts&appid=#{api_key}"
-      response = HTTParty.get(url)
-      handle_response(response, zip_code: zip_code, country_code: country_code)
+        response = HTTParty.get(url)
+        handle_response(response, zip_code: zip_code, country_code: country_code)
+      end
     rescue StandardError => e
       raise_exception("Failed to fetch weather data: #{e.message}.", zip_code:, country_code:)
     end

@@ -47,6 +47,8 @@ gem "bootsnap", require: false
 # Add httparty for making HTTP requests
 gem "httparty"
 
+gem "dalli"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
