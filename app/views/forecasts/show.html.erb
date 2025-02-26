@@ -1,8 +1,8 @@
 <section class="vh-100" style="background-size: 100% 100%; background-image: url('https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+  <%= link_to "New Search", root_path, class: "btn btn-primary", style: "position: absolute; left: 1rem; top: 1rem;" %>
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-12 col-xl-10">
-
         <div class="card shadow-0 border border-dark border-5 text-dark" style="border-radius: 10px;">
           <div class="card-body p-4">
             <div class="row text-center">
@@ -16,9 +16,10 @@
               </div>
               <div class="d-flex justify-content-around align-items-center py-5 my-4">
                 <p class="fw-bold mb-0" style="font-size: 7rem;">-4°C</p>
-                <div class="text-start">
+                <div class="text-center">
+                  <p class="h3 mb-2"><%= @data[:day_of_week] %></p>
+                  <p class="small mb-0"><%= @data[:date] %></p>
                   <p class="small"><%= @data[:time] %></p>
-                  <p class="h3 mb-3"><%= @data[:day_of_week] %></p>
                 </div>
               </div>
               <div class="d-flex justify-content-around align-items-center mb-3">

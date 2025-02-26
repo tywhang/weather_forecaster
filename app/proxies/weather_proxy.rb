@@ -70,11 +70,11 @@ class WeatherProxy
     end
 
     def dt_to_date(dt)
-      Time.at(dt).strftime("%Y-%m-%d")
+      Time.at(dt).strftime("%B %d, %Y")
     end
 
     def dt_to_time(dt)
-      Time.at(dt).strftime("%H:%M")
+      Time.at(dt).strftime("%I:%M %p")
     end
 
     def dt_to_day_of_week(dt)
