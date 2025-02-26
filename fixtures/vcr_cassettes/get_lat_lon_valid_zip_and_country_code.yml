@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - openresty
       Date:
-      - Tue, 25 Feb 2025 08:16:19 GMT
+      - Wed, 26 Feb 2025 00:45:09 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -39,5 +39,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"zip":"10001","name":"New York","lat":40.7484,"lon":-73.9967,"country":"US"}'
-  recorded_at: Tue, 25 Feb 2025 08:16:19 GMT
+  recorded_at: Wed, 26 Feb 2025 00:45:09 GMT
 recorded_with: VCR 6.3.1

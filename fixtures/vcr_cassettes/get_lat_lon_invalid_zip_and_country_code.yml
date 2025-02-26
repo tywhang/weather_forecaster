@@ -61,7 +61,7 @@ http_interactions:
       Server:
       - openresty
       Date:
-      - Tue, 25 Feb 2025 08:12:13 GMT
+      - Wed, 26 Feb 2025 00:44:51 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -79,5 +79,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"cod":"404","message":"not found"}'
-  recorded_at: Tue, 25 Feb 2025 08:12:13 GMT
+  recorded_at: Wed, 26 Feb 2025 00:44:51 GMT
 recorded_with: VCR 6.3.1

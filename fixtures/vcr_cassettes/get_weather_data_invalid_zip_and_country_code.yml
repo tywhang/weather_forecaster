@@ -61,7 +61,7 @@ http_interactions:
       Server:
       - openresty
       Date:
-      - Tue, 25 Feb 2025 08:12:13 GMT
+      - Wed, 26 Feb 2025 00:46:17 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -79,5 +79,45 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"cod":"404","message":"not found"}'
-  recorded_at: Tue, 25 Feb 2025 08:12:13 GMT
+  recorded_at: Wed, 26 Feb 2025 00:46:17 GMT
+- request:
+    method: get
+    uri: https://api.openweathermap.org/data/3.0/onecall?appid=347d7ad00e9036d0210f3760a97b5514&exclude=minutely,hourly,alerts&lat=&lon=
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - openresty
+      Date:
+      - Wed, 26 Feb 2025 00:46:18 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '44'
+      Connection:
+      - keep-alive
+      X-Cache-Key:
+      - "/data/3.0/onecall?exclude=minutely,hourly,alerts&lat=&lon="
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '{"cod":"400","message":"Nothing to geocode"}'
+  recorded_at: Wed, 26 Feb 2025 00:46:18 GMT
 recorded_with: VCR 6.3.1

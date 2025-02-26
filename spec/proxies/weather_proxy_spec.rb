@@ -35,7 +35,7 @@ RSpec.describe WeatherProxy, type: :model do
           VCR.use_cassette('get_weather_data_invalid_zip_and_country_code') do
             WeatherProxy.get_weather_data(zip_code: invalid_zip_code, country_code: invalid_country_code)
           end
-        end.to raise_error(RuntimeError, 'WeatherProxy - zip_code: 000000, country_code: ZZ: Failed to fetch weather data: WeatherProxy - zip_code: 000000, country_code: ZZ: HTTP request failed with code 404: Not Found.')
+        end.to raise_error(RuntimeError, 'WeatherProxy - zip_code: 000000, country_code: ZZ: Failed to fetch weather data: WeatherProxy - zip_code: 000000, country_code: ZZ: HTTP request failed with code 400: Bad Request.')
       end
     end
   end
@@ -52,12 +52,12 @@ RSpec.describe WeatherProxy, type: :model do
     end
 
     context 'when the zip and country code are not valid' do
-      it 'raises an error with the correct message' do
-        expect do
-          VCR.use_cassette('get_lat_lon_invalid_zip_and_country_code') do
-            WeatherProxy.send(:get_lat_lon, zip_code: invalid_zip_code, country_code: invalid_country_code)
-          end
-        end.to raise_error(RuntimeError, 'WeatherProxy - zip_code: 000000, country_code: ZZ: HTTP request failed with code 404: Not Found')
+      it 'return nil values' do
+        result = VCR.use_cassette('get_lat_lon_invalid_zip_and_country_code') do
+          WeatherProxy.send(:get_lat_lon, zip_code: invalid_zip_code, country_code: invalid_country_code)
+        end
+
+        expect(result).to eq([nil, nil])
       end
     end
   end
