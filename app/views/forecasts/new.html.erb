@@ -1,19 +1,30 @@
 <section class="vh-100" style="background-size: 100% 100%; background-image: url('https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-  <h1 class="text-center" style="padding-top: 40vh">Weather Forecaster</h1>
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-      <p><%= flash[:alert] %></p>
-      <%= form_with(model: @forecast, url: forecasts_path, method: :get) do |form| %>
-        <div class="input-group">
-          <input id="autocomplete" type="search" placeholder="Enter a location" class="form-control" />
-          <input type="hidden" name="country_code" id="country_code" />
-          <input type="hidden" name="zip_code" id="zip_code" />
-          <%= form.submit "Show Forecast", class: 'btn btn-primary' %>
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-10">
+
+        <div class="card shadow-0 border border-dark border-5 text-dark" style="border-radius: 10px; padding: 4rem;">
+          <div class="card-body p-4">
+            <h1 class="text-center">Weather Forecaster</h1>
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <p><%= flash[:alert] %></p>
+                <%= form_with(model: @forecast, url: forecasts_path, method: :get) do |form| %>
+                  <div class="input-group">
+                    <input id="autocomplete" type="search" placeholder="Enter a location" class="form-control" />
+                    <input type="hidden" name="country_code" id="country_code" />
+                    <input type="hidden" name="zip_code" id="zip_code" />
+                    <%= form.submit "Show Forecast", class: 'btn btn-primary' %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="col-md-3"></div>
+            </div>
+          </div>
         </div>
-      <% end %>
+      </div>
     </div>
-    <div class="col-md-3"></div>
   </div>
 </section>
 
