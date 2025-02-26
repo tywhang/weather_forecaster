@@ -13,12 +13,17 @@ RSpec.describe WeatherProxy, type: :model do
           WeatherProxy.get_weather_data(zip_code: zip_code, country_code: country_code)
         end
 
-        expect(result[:lat]).to be_present
-        expect(result[:lon]).to be_present
-        expect(result[:date]).to be_present
-        expect(result[:time]).to be_present
-        expect(result[:day_of_week]).to be_present
-        expect(result[:temp]).to be_present
+        expect(result.except(:cache_exists, :daily)).to eq(
+          {
+            lat: 40.7484,
+            lon: -73.9967,
+            date: 'February 25, 2025',
+            time: '05:05 PM',
+            day_of_week: 'Tue',
+            temp: 50
+          }
+        )
+
         expect(result[:daily].length).to eq(7)
 
         result[:daily].each do |day|
@@ -26,6 +31,11 @@ RSpec.describe WeatherProxy, type: :model do
           expect(day[:temp_min]).to be_present
           expect(day[:temp_max]).to be_present
         end
+
+        first_result = result[:daily].first
+        expect(first_result[:day_of_week]).to eq('Tue')
+        expect(first_result[:temp_min]).to eq(38)
+        expect(first_result[:temp_max]).to eq(51)
       end
     end
 
