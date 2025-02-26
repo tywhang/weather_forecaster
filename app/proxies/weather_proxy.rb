@@ -9,8 +9,7 @@ class WeatherProxy
       
       res = Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
         lat, lon = get_lat_lon(zip_code: zip_code, country_code: country_code)
-        url = "#{ONECALL_BASE_API}?lat=#{lat}&lon=#{lon}&exclude=minutely,hourly,alerts&appid=#{api_key}"
-
+        url = "#{ONECALL_BASE_API}?lat=#{lat}&lon=#{lon}&exclude=minutely,hourly,alerts&units=imperial&appid=#{api_key}"
         response = HTTParty.get(url)
         handle_response(response, zip_code: zip_code, country_code: country_code)
       end
@@ -58,12 +57,12 @@ class WeatherProxy
         date: dt_to_date(current_dt),
         time: dt_to_time(current_dt),
         day_of_week: dt_to_day_of_week(current_dt),
-        temp: kelvin_to_celsius(res['temp']),
+        temp: res['current']['temp'].round,
         daily: res['daily'].slice(0, 7).map do |day|
           {
             day_of_week: dt_to_day_of_week(day['dt']),
-            temp_min: kelvin_to_celsius(day['temp']['min']),
-            temp_max: kelvin_to_celsius(day['temp']['max']),
+            temp_min: day['temp']['min'].round,
+            temp_max: day['temp']['max'].round,
           }
         end
       }
@@ -79,10 +78,6 @@ class WeatherProxy
 
     def dt_to_day_of_week(dt)
       Time.at(dt).strftime("%a")
-    end
-
-    def kelvin_to_celsius(kelvin)
-      (kelvin.to_f - 273.15).round
     end
 
     def raise_exception(message, zip_code:, country_code:)

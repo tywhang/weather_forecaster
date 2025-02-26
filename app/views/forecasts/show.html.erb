@@ -15,7 +15,7 @@
                 </p>
               </div>
               <div class="d-flex justify-content-around align-items-center py-5 my-4">
-                <p class="fw-bold mb-0" style="font-size: 7rem;">-4°C</p>
+                <p class="fw-bold mb-0" style="font-size: 7rem;"><%= @data[:temp] %>°F</p>
                 <div class="text-center">
                   <p class="h3 mb-2"><%= @data[:day_of_week] %></p>
                   <p class="small mb-0"><%= @data[:date] %></p>
@@ -31,8 +31,8 @@
                 <% @data[:daily].each do |day| %>
                   <div class="flex-column">
                     <p class="small mb-1"><%= day[:day_of_week] %></p>
-                    <p class="small mb-0"><strong>-<%= day[:temp_max] %>°C</strong></p>
-                    <p class="small mb-0"><strong>-<%= day[:temp_min] %>°C</strong></p>
+                    <p class="small mb-0"><strong><%= day[:temp_max] %>°F</strong></p>
+                    <p class="small mb-0"><strong><%= day[:temp_min] %>°F</strong></p>
                   </div>
                 <% end %>
                 <div class="flex-column">
